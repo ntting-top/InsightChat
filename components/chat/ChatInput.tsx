@@ -17,13 +17,19 @@ export function ChatInput({
   onImagePress,
   onVoicePress
 }: Props) {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      onSend()
+    }
+  }
+
   return (
     <XStack
       padding="$4"
       gap="$2"
       backgroundColor="$yellow2"
-      borderTopWidth={1}
-      borderColor="$yellow3"
+      alignItems="center"
     >
       <Button
         size="$4"
@@ -34,10 +40,13 @@ export function ChatInput({
       
       <Input
         flex={1}
+        backgroundColor="$yellow1"
+        borderWidth={1}
+        borderColor="$yellow5"
         value={value}
         onChangeText={onChangeText}
-        backgroundColor="$white"
-        borderRadius="$4"
+        onKeyPress={handleKeyPress}
+        placeholder="说点什么吧..."
         height={44}
       />
       

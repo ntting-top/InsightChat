@@ -1,3 +1,4 @@
+// code/ChatPage.tsx
 import { useState } from 'react'
 import { YStack } from 'tamagui'
 import { ChatHeader } from '../components/chat/ChatHeader'

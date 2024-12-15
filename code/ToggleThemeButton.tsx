@@ -1,3 +1,4 @@
+// code/ChatPage.tsx
 import { useState } from 'react'
 import { YStack } from 'tamagui'
 import { ChatHeader } from '../components/chat/ChatHeader'
@@ -35,6 +36,7 @@ export function ToggleThemeButton() {
   const handleSend = () => {
     if (!inputText.trim()) return
 
+    // 添加用户消息
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputText,
@@ -43,6 +45,7 @@ export function ToggleThemeButton() {
       timestamp: new Date()
     }
 
+    // 添加机器人回复
     const botMessage: Message = {
       id: (Date.now() + 1).toString(),
       content: getRandomResponse(),
@@ -52,37 +55,7 @@ export function ToggleThemeButton() {
     }
 
     setMessages([...messages, userMessage, botMessage])
-    setInputText('')
-  }
-
-  const handleAction = (type: ChatActionType) => {
-    switch (type) {
-      case '重新启动':
-        setMessages([WELCOME_MESSAGE])
-        break
-      
-      case '总结':
-        const summaryMessage: Message = {
-          id: Date.now().toString(),
-          content: '让我帮你总结一下我们的对话喵~ 我们聊了很多有趣的话题呢！',
-          type: 'text',
-          isUser: false,
-          timestamp: new Date()
-        }
-        setMessages([...messages, summaryMessage])
-        break
-      
-      case '分析':
-        const analysisMessage: Message = {
-          id: Date.now().toString(),
-          content: '分析一下我们的对话内容：我们聊得很开心呢！继续保持这种愉快的交流吧~',
-          type: 'text',
-          isUser: false,
-          timestamp: new Date()
-        }
-        setMessages([...messages, analysisMessage])
-        break
-    }
+    setInputText('') // 清空输入框
   }
 
   return (
@@ -96,7 +69,7 @@ export function ToggleThemeButton() {
         onImagePress={() => {}}
         onVoicePress={() => {}}
       />
-      <BottomActions onAction={handleAction} />
+      <BottomActions onAction={() => {}} />
     </YStack>
   )
 }
