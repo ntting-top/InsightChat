@@ -14,7 +14,7 @@ export function ChatMessage({ message }: Props) {
     >
       {!message.isUser && (
         <Image
-          source={require('../../assets/cat-avatar.png')}
+          source={{ uri: './public/cat.jpg' }}
           width={40}
           height={40}
           borderRadius={20}

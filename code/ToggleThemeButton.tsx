@@ -6,10 +6,31 @@ import { ChatInput } from '../components/chat/ChatInput'
 import { BottomActions } from '../components/chat/BottomActions'
 import { Message, ChatActionType } from '../types/chat'
 
+const WELCOME_MESSAGE: Message = {
+  id: 'welcome',
+  content: '又看見你啦，新的一天是美好的一天哦 😊',
+  type: 'text',
+  isUser: false,
+  timestamp: new Date()
+}
+
+const BOT_RESPONSES = [
+  '喵~ 这个想法很有趣呢！',
+  '让我想想看喵...',
+  '说得对呢！',
+  '需要我帮你什么吗？',
+  '真是个好主意呢！',
+  '我们一起来探索这个问题吧！'
+]
 
 export function ToggleThemeButton() {
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE])
   const [inputText, setInputText] = useState('')
+
+  const getRandomResponse = () => {
+    const index = Math.floor(Math.random() * BOT_RESPONSES.length)
+    return BOT_RESPONSES[index]
+  }
 
   const handleSend = () => {
     if (!inputText.trim()) return
@@ -24,7 +45,7 @@ export function ToggleThemeButton() {
 
     const botMessage: Message = {
       id: (Date.now() + 1).toString(),
-      content: '喵~ ' + inputText,
+      content: getRandomResponse(),
       type: 'text',
       isUser: false,
       timestamp: new Date()
@@ -37,13 +58,13 @@ export function ToggleThemeButton() {
   const handleAction = (type: ChatActionType) => {
     switch (type) {
       case '重新启动':
-        setMessages([])
+        setMessages([WELCOME_MESSAGE])
         break
       
       case '总结':
         const summaryMessage: Message = {
           id: Date.now().toString(),
-          content: '这是我们的对话总结喵~',
+          content: '让我帮你总结一下我们的对话喵~ 我们聊了很多有趣的话题呢！',
           type: 'text',
           isUser: false,
           timestamp: new Date()
@@ -54,7 +75,7 @@ export function ToggleThemeButton() {
       case '分析':
         const analysisMessage: Message = {
           id: Date.now().toString(),
-          content: '让我分析一下对话内容喵~',
+          content: '分析一下我们的对话内容：我们聊得很开心呢！继续保持这种愉快的交流吧~',
           type: 'text',
           isUser: false,
           timestamp: new Date()
@@ -65,7 +86,7 @@ export function ToggleThemeButton() {
   }
 
   return (
-    <YStack flex={1}>
+    <YStack flex={1} backgroundColor="$yellow1">
       <ChatHeader />
       <MessageList messages={messages} />
       <ChatInput
