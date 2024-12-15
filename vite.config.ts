@@ -9,7 +9,7 @@ const safeEnv = {
 };
 
 export default {
-  base: '/hello-world/',
+  base: '/InsightChat/', 
   plugins: [
     one({
       web: {
@@ -35,6 +35,7 @@ export default {
       resolveExtensions: ['.web.js', '.js', '.ts', '.jsx', '.tsx'],
     },
   },
+
   build: {
     rollupOptions: {
       input: {
