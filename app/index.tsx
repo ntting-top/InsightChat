@@ -3,7 +3,6 @@ import { Text, YStack } from 'tamagui'
 import { ToggleThemeButton } from '~/code/ToggleThemeButton'
 import oneBall from '~/public/app-icon.png'
 import { ChatPage } from '../code/chatPage'
-import { createRoot } from 'react-dom/client'
 
 export function HomePage() {
   return (
@@ -12,6 +11,3 @@ export function HomePage() {
     </YStack>
   )
 }
-
-const root = createRoot(document.getElementById('root')!)
-root.render(<HomePage />)
