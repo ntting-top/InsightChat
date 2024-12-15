@@ -2,6 +2,7 @@ import type { UserConfig } from 'vite'
 import { one } from 'one/vite'
 import { tamaguiPlugin } from '@tamagui/vite-plugin'
 import { resolve } from 'path'
+import { default as react } from '@vitejs/plugin-react-swc'
 
 // 创建一个最小化的环境变量集合
 const safeEnv = {
@@ -9,11 +10,10 @@ const safeEnv = {
 };
 
 export default {
+  base: '/hello-world/',
   plugins: [
     one({
-      web: {
-        defaultRenderMode: 'ssg',
-      },
+      web: [react()],
     }),
     tamaguiPlugin({
       components: ['tamagui'],
@@ -40,6 +40,8 @@ export default {
         main: resolve(__dirname, 'app/index.tsx'),
       },
       external: ['react-native'],
-    }
+
+    },
+    outDir: 'dist',
   }
 } satisfies UserConfig
